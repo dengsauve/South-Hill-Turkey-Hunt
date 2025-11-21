@@ -1,10 +1,13 @@
-from scripts.welcome import *
-from player import Player
+# from scripts.welcome import *
+from scripts import welcome, help
 from levels.level_0 import *
+from player import Player
+from utils import clear_screen
 
 def main():
+    clear_screen()
     # TODO: Load Save File when I create it
-    welcome_message()
+    welcome.welcome_message()
     level_zero = load_level_0()
     player_name = input("So, player, go ahead and enter your name: ")
     player = Player(player_name, level_zero)
@@ -13,9 +16,21 @@ def main():
 
     while(choice != -1):
         # Print the level name
-        print(player.level.name)
+        print(f"\nYou're at: {player.level.name}")
 
-        choice = input("Your move: ")
+        choice = input("\n\nYour move: ")
+        clear_screen()
+        # Check for "help", "instructions"
+        if choice == "help" or choice == "instructions" or choice == "moves":
+            help.show_help(player)
+        
+        # Check for "look"
+        if choice == "look":
+            print(f"\n{player.level.description}")
+            print(f"\nAround you you see:")
+            for lvl in player.level.adjacent_levels:
+                print (f"- {lvl.name}")
+        
         # Check for "move", "go", "go to", "get in", "enter"
 
         # Check for "exit", "quit", etc.

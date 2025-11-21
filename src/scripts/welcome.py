@@ -2,7 +2,7 @@ from textwrap import dedent
 
 def welcome_message():
     # TODO: Make this scroll out like an RPG. Maybe not. IDK
-    message = """\
+    message = """\n\n\
     You wake up early in the morning, the Wednesday before Thanksgiving.
     You head to the kitchen to pour a bowl of Muesli and turn on the TV.
     
