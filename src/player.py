@@ -1,6 +1,5 @@
 class Player():
-    def __init__(self, name, level):
+    def __init__(self, name):
         self.name = name
-        self.level = level
-        self.inventory = []
+        self.inventory = ['Upper']
         
