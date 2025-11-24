@@ -6,7 +6,7 @@ def build_world():
             id="home",
             name="Your House, in the middle of your street",
             description="Homebase, where everything is. In the garage you have a bow and arrow.",
-            adjacent_levels={"north": "lincoln_park"}
+            adjacent_levels={"north": "lincoln_park", "west": "eggers"}
         ),
         "lincoln_park": Level(
             id="lincoln_park",
@@ -30,13 +30,19 @@ def build_world():
             id="manito_park",
             name="Manito Park",
             description="Spokane's premier park, featuring ponds, rose gardens, courtyards, and a greenhouse conservatory.",
-            adjacent_levels={"north": "medical_park", "west": "cliff_cannon_park"}
+            adjacent_levels={"north": "medical_park", "west": "cliff_cannon_park", "south": "eggers"}
         ),
         "cliff_cannon_park": Level(
             id="cliff_cannon_park",
             name="Cliff Cannon Park",
             description="A small park surrounded by Spokane's elite.",
-            adjacent_levels={"east": "manito_park"}
+            adjacent_levels={"east": "manito_park", "south": "eggers"}
+        ),
+        "eggers": Level(
+            id="eggers",
+            name="Eggers Butcher",
+            description="A friendly local butcher.",
+            adjacent_levels={"south": "cliff_cannon", "southeast": "manito_park", "east": "eggers"}
         ),
     }
 
