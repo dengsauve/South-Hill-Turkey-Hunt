@@ -35,29 +35,19 @@ class Game:
         args = words[1] if len(words) > 1 else None
         # print(words, verb, args)
 
-        # Check for "help", "instructions"
         if verb in HELP_COMMANDS:
             help.show_help(self.player)
-
-        # Check for "look"
-        if verb in OBSERVE_VERBS:
+        elif verb in OBSERVE_VERBS:
             self.show_observation()
-
-        # Check for "move", "go", "go to", "get in", "enter"
-        if verb in MOVE_VERBS:
+        elif verb in MOVE_VERBS:
             self.move_player(args)
-
-        if verb in GRAB_VERBS:
+        elif verb in GRAB_VERBS:
             self.grab(args)
-
-        if verb in HUNT_VERBS:
+        elif verb in HUNT_VERBS:
             self.hunt_turkey()
-        
-        if verb in INVENTORY_COMMANDS:
+        elif verb in INVENTORY_COMMANDS:
             self.show_inventory()
-
-        # Check for "exit", "quit", etc.
-        if verb in EXIT_VERBS:
+        elif verb in EXIT_VERBS:
             self.exit_game()
 
     def show_observation(self):
