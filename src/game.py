@@ -3,13 +3,7 @@ from scripts import welcome, help
 from player import Player
 from utils import clear_screen
 from world import build_world
-
-MOVE_VERBS = ("move", "go", "travel", "walk", "drive")
-EXIT_VERBS = ("quit", "exit", "e", "q")
-OBSERVE_VERBS = ("look", "l")
-HELP_COMMANDS = ("help", "instructions", "h")
-GRAB_VERBS = ("take", "grab", "get")
-HUNT_VERBS = ("hunt")
+from constants import *
 
 
 class Game:
@@ -26,7 +20,7 @@ class Game:
         print(f"\nYou're at {self.level.name}")
 
         while self.command != -1:
-            self.command = input("\n\nYour move: ")
+            self.command = input("\n=========\nYour move: ")
             print()
             self.parse_command()
             self.moves += 1
@@ -39,7 +33,7 @@ class Game:
         words = self.command.lower().split(" ")
         verb = words[0]
         args = words[1] if len(words) > 1 else None
-        print(words, verb, args)
+        # print(words, verb, args)
 
         # Check for "help", "instructions"
         if verb in HELP_COMMANDS:
@@ -52,12 +46,15 @@ class Game:
         # Check for "move", "go", "go to", "get in", "enter"
         if verb in MOVE_VERBS:
             self.move_player(args)
-        
+
         if verb in GRAB_VERBS:
             self.grab(args)
-        
+
         if verb in HUNT_VERBS:
             self.hunt_turkey()
+        
+        if verb in INVENTORY_COMMANDS:
+            self.show_inventory()
 
         # Check for "exit", "quit", etc.
         if verb in EXIT_VERBS:
@@ -65,6 +62,9 @@ class Game:
 
     def show_observation(self):
         print(self.level.get_observation())
+    
+    def show_inventory(self):
+        print(self.player.get_inventory())
 
     def move_player(self, args):
         if not args:
@@ -90,7 +90,7 @@ class Game:
         self.level.remove_turkey()
         self.player.add_turkey()
         print(f"You successfully bag a turkey! {self.player.get_turkey_status()}")
-    
+
     def grab(self, args):
         if args == None:
             print("Grab what?")
@@ -99,13 +99,17 @@ class Game:
             if self.level.turkeys > 0:
                 damage_points = random.choice([1, 2, 3])
                 self.player.take_damage(damage_points)
-                print(f"Grabbing a turkey turns out to be a poor idea. You lose {damage_points} points of health!")
+                print(
+                    f"Grabbing a turkey turns out to be a poor idea. You lose {damage_points} points of health!"
+                )
                 print(self.player.get_health_status())
             else:
-                print("There are no turkeys to grab, and even if there were, it's not a good idea. (hint hint)")
+                print(
+                    "There are no turkeys to grab, and even if there were, it's not a good idea. (hint hint)"
+                )
+        else:
+            print(f"You cannot grab {args}")
 
-    
     def exit_game(self):
         print(f"You made a total of {self.moves} moves.")
         exit()
-        

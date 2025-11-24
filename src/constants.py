@@ -1,0 +1,7 @@
+MOVE_VERBS = ("move", "go", "travel", "walk", "drive")
+EXIT_VERBS = ("quit", "exit", "e", "q")
+OBSERVE_VERBS = ("look", "l")
+HELP_COMMANDS = ("help", "instructions", "h")
+GRAB_VERBS = ("take", "grab", "get")
+HUNT_VERBS = ("hunt", "shoot")
+INVENTORY_COMMANDS = ("inventory", "i", "items")

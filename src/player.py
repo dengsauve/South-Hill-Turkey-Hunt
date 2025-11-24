@@ -34,3 +34,11 @@ class Player:
     
     def shoot_arrow(self):
         self.inventory["arrow"] -= 1
+    
+    def get_inventory(self):
+        return f"""
+In your bag, you have:
+- bow    {self.inventory['bow']}
+- arrow  {self.inventory['arrow']}
+- turkey {self.inventory['turkeys']}
+        """
