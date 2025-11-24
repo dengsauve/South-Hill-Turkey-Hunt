@@ -14,6 +14,9 @@ class Level():
     def get_adjacent_levels(self):
         return self.adjacent_levels
     
+    def get_adjacent_level(self, direction):
+        return self.adjacent_levels[direction]
+    
     def get_name(self):
         return self.name
     
