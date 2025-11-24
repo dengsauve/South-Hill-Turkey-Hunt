@@ -1,3 +1,4 @@
+import random
 from scripts import welcome, help
 from player import Player
 from utils import clear_screen
@@ -8,7 +9,7 @@ EXIT_VERBS = ("quit", "exit", "e", "q")
 OBSERVE_VERBS = ("look", "l")
 HELP_COMMANDS = ("help", "instructions", "h")
 GRAB_VERBS = ("take", "grab", "get")
-HUNT_VERBS = "hunt"
+HUNT_VERBS = ("hunt")
 
 
 class Game:
@@ -52,13 +53,15 @@ class Game:
         if verb in MOVE_VERBS:
             self.move_player(args)
         
+        if verb in GRAB_VERBS:
+            self.grab(args)
+        
         if verb in HUNT_VERBS:
             self.hunt_turkey()
 
         # Check for "exit", "quit", etc.
         if verb in EXIT_VERBS:
-            print(f"You made a total of {self.moves} moves.")
-            exit()
+            self.exit_game()
 
     def show_observation(self):
         print(self.level.get_observation())
@@ -87,4 +90,22 @@ class Game:
         self.level.remove_turkey()
         self.player.add_turkey()
         print(f"You successfully bag a turkey! {self.player.get_turkey_status()}")
+    
+    def grab(self, args):
+        if args == None:
+            print("Grab what?")
+            return
+        if args == "turkey":
+            if self.level.turkeys > 0:
+                damage_points = random.choice([1, 2, 3])
+                self.player.take_damage(damage_points)
+                print(f"Grabbing a turkey turns out to be a poor idea. You lose {damage_points} points of health!")
+                print(self.player.get_health_status())
+            else:
+                print("There are no turkeys to grab, and even if there were, it's not a good idea. (hint hint)")
+
+    
+    def exit_game(self):
+        print(f"You made a total of {self.moves} moves.")
+        exit()
         
