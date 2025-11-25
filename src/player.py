@@ -1,3 +1,5 @@
+import random
+
 class Player:
     def __init__(self, name):
         self.name = name
@@ -8,6 +10,7 @@ class Player:
         }
         self.health = 10
         self.enough_turkeys = self.inventory["turkeys"] > 4
+        self.stars = 0
     
     def add_turkey(self):
         self.inventory["turkeys"] += 1
@@ -38,6 +41,12 @@ class Player:
     
     def shoot_arrow(self):
         self.inventory["arrow"] -= 1
+        # Check stars vs Cops
+        if self.stars > 2:
+            if random.uniform(0,1) * self.stars / 5 > .5:
+                print("You've been arrested, game over punk!")
+                print("Next time, try not to shoot so many turkeys in the same place!\n\n")
+                exit()
     
     def get_inventory(self):
         return f"""
@@ -46,3 +55,12 @@ In your bag, you have:
 - arrow  {self.inventory['arrow']}
 - turkey {self.inventory['turkeys']}
         """
+    
+    def increase_stars(self):
+        self.stars += 1
+        print(f"You disturb the locals, you have {self.stars} stars.")
+    
+    def decrease_stars(self):
+        if self.stars > 0:
+            self.stars -= 1
+        print(f"You avoid some detection, you have {self.stars} stars.")

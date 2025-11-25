@@ -27,6 +27,9 @@ def show_help(player):
     - {' | '.join(BUTCHER_COMMANDS)}
         purpose: Turn in the turkeys to eggers with this command
     
+    - {' | '.join(STEAL_VERBS)}
+        purpose: Used for taking things that don't belong to you
+    
     - {' | '.join(EXIT_VERBS)}
         purpose: Exit the game and provide the number of moves taken
     """

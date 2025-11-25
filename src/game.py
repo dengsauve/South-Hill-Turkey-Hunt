@@ -14,6 +14,7 @@ class Game:
         self.player = None
         self.level = self.world["home"]
         self.game_won = False
+        self.stole_a10 = False
 
     def start(self):
         welcome.splash_screen()
@@ -29,7 +30,7 @@ class Game:
             self.parse_command()
             self.moves += 1
         
-        # Show congrats message!
+        self.exit_game()
 
     def setup_player(self):
         player_name = input("So, player, go ahead and enter your name: ")
@@ -55,6 +56,8 @@ class Game:
             self.show_inventory()
         elif verb in BUTCHER_COMMANDS:
             self.butcher()
+        elif verb in STEAL_VERBS:
+            self.steal_plane()
         elif verb in EXIT_VERBS:
             self.exit_game()
         else:
@@ -72,6 +75,7 @@ class Game:
         else:
             if args in self.level.get_adjacent_levels().keys():
                 self.level = self.level.get_adjacent_level(args)
+                self.player.decrease_stars()
                 print(self.level.get_observation())
             else:
                 print(f"{args} is not a valid destination.")
@@ -87,6 +91,7 @@ class Game:
             return
         # Proceed with the hunt
         self.player.shoot_arrow()
+        self.player.increase_stars()
         self.level.remove_turkey()
         self.player.add_turkey()
         print(f"You successfully bag a turkey! {self.player.get_turkey_status()}")
@@ -117,8 +122,18 @@ class Game:
             print("You must acquire more turkeys, trying hunting them.")
             return
         self.game_won = True
-        print(f"You've won the game and saved Thanksgiving in {self.moves} moves!")
+        print(f"You've won the game and saved Thanksgiving!")
+    
+    def steal_plane(self):
+        if self.level.id == "afb":
+            self.stole_a10 = True
+        else:
+            print("There's nothing here to steal!")
 
     def exit_game(self):
         print(f"You made a total of {self.moves} moves.")
+        if self.stole_a10:
+            print("You unlocked the secret objective, stealing an A10!")
+        print("\n\nThank you for taking time out of your life to play my game.")
+        print("Cheers,\n\n-Dennis")
         exit()

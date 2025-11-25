@@ -32,7 +32,10 @@ def build_world():
             id="cda_park",
             name="Couer d'Alene Park",
             description="A lovely park in Spokane's Browne's Addition neighborhood.",
-            adjacent_levels={"east": "medical_park"},
+            adjacent_levels={
+                "east": "medical_park",
+                "west": "afb"
+                },
             turkeys=3,
         ),
         "manito_park": Level(
@@ -61,6 +64,15 @@ def build_world():
                 "south": "cliff_cannon",
                 "southeast": "manito_park",
                 "east": "eggers",
+            },
+            turkeys=0,
+        ),
+        "afb": Level(
+            id="afb",
+            name="Fairchild Air Force Base",
+            description="Spokane's premier AFB. You see an attractive A10 on the runway, seemingly idle.",
+            adjacent_levels={
+                "east": "cda_park",
             },
             turkeys=0,
         ),
