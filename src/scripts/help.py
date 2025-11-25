@@ -24,6 +24,9 @@ def show_help(player):
     - {' | '.join(INVENTORY_COMMANDS)}
         purpose: Take stock of what you have in your backpack
     
+    - {' | '.join(BUTCHER_COMMANDS)}
+        purpose: Turn in the turkeys to eggers with this command
+    
     - {' | '.join(EXIT_VERBS)}
         purpose: Exit the game and provide the number of moves taken
     """

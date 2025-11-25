@@ -7,6 +7,7 @@ class Player:
             "turkeys": 0,
         }
         self.health = 10
+        self.enough_turkeys = self.inventory["turkeys"] > 4
     
     def add_turkey(self):
         self.inventory["turkeys"] += 1
@@ -18,6 +19,9 @@ class Player:
         if self.inventory["turkeys"] == 1:
             return "You have 1 turkey!"
         return f"You have {self.inventory["turkeys"]} turkeys!"
+    
+    def get_turkey_count(self):
+        return self.inventory["turkeys"]
     
     def take_damage(self, damage_points):
         self.health -= damage_points

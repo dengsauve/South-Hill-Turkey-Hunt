@@ -13,17 +13,23 @@ class Game:
         self.command = None
         self.player = None
         self.level = self.world["home"]
+        self.game_won = False
 
     def start(self):
+        welcome.splash_screen()
         welcome.welcome_message()
         self.setup_player()
+        print("\n==========\n")
+        help.show_help(self.player)
         print(f"\nYou're at {self.level.name}")
 
-        while self.command != -1:
+        while self.game_won == False:
             self.command = input("\n=========\nYour move: ")
             print()
             self.parse_command()
             self.moves += 1
+        
+        # Show congrats message!
 
     def setup_player(self):
         player_name = input("So, player, go ahead and enter your name: ")
@@ -47,8 +53,12 @@ class Game:
             self.hunt_turkey()
         elif verb in INVENTORY_COMMANDS:
             self.show_inventory()
+        elif verb in BUTCHER_COMMANDS:
+            self.butcher()
         elif verb in EXIT_VERBS:
             self.exit_game()
+        else:
+            print(f"{verb} is not a recognized command. Type help for available commands.")
 
     def show_observation(self):
         print(self.level.get_observation())
@@ -68,7 +78,7 @@ class Game:
 
     def hunt_turkey(self):
         # Check for turkeys
-        if self.level.turkeys == 0:
+        if self.level.turkeys == 0 and self.player.get_turkey_count() < 5:
             print("There are no turkeys to hunt here, try another park.")
             return
         # Check for arrows
@@ -80,6 +90,8 @@ class Game:
         self.level.remove_turkey()
         self.player.add_turkey()
         print(f"You successfully bag a turkey! {self.player.get_turkey_status()}")
+        if self.player.get_turkey_count() > 4:
+            print("\nYou now have enough turkeys to donate, bring them to Eggers! (head south)")
 
     def grab(self, args):
         if args == None:
@@ -99,6 +111,13 @@ class Game:
                 )
         else:
             print(f"You cannot grab {args}")
+    
+    def butcher(self):
+        if self.player.get_turkey_count() < 4:
+            print("You must acquire more turkeys, trying hunting them.")
+            return
+        self.game_won = True
+        print(f"You've won the game and saved Thanksgiving in {self.moves} moves!")
 
     def exit_game(self):
         print(f"You made a total of {self.moves} moves.")
