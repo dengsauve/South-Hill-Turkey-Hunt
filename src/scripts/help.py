@@ -7,6 +7,9 @@ def show_help(player):
     message = f"""\
     Ok {player.name}, here's the 411:
 
+    - {' | '.join(HELP_COMMANDS)}
+        purpose: provide a list of commands to be used in the game.
+
     - {' | '.join(MOVE_VERBS)}
         usage: "move (direction, e.g. north, south, east, west)"
     

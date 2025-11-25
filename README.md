@@ -19,3 +19,36 @@ Hunt the turkeys, save thanksgiving, feed the community, and rid the south hill 
 Golf is the name of the game. Complete the objectives and save the day in the fewest number of moves. 
 
 Alternatively, set a record for the most moves. Live your best life.
+
+### Commmands
+
+```
+- help | instructions | h
+    purpose: provide a list of commands to be used in the game.
+
+- move | go | travel | walk | drive
+    usage: "move (direction, e.g. north, south, east, west)"
+
+- look | l
+    purpose: Provide a description of the current or surrounding area(s)
+    usage: "look", "look (direction)"
+
+- take | grab | get
+    purpose: Grab something
+    usage: "grab turkey"
+
+- hunt | shoot
+    purpose: Hunt turkeys in a location, if there are any
+
+- inventory | i | items
+    purpose: Take stock of what you have in your backpack
+
+- butcher | donate
+    purpose: Turn in the turkeys to eggers with this command
+
+- steal | hijack
+    purpose: Used for taking things that don't belong to you
+
+- quit | exit | e | q
+    purpose: Exit the game and provide the number of moves taken
+```
