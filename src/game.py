@@ -1,5 +1,5 @@
 import random
-from scripts import welcome, help
+from scripts import welcome, help, turkey
 from player import Player
 from utils import clear_screen
 from world import build_world
@@ -131,6 +131,7 @@ class Game:
             print("There's nothing here to steal!")
 
     def exit_game(self):
+        turkey.show_turkey()
         print(f"You made a total of {self.moves} moves.")
         if self.stole_a10:
             print("You unlocked the secret objective, stealing an A10!")
