@@ -34,7 +34,8 @@ def build_world():
             description="A lovely park in Spokane's Browne's Addition neighborhood.",
             adjacent_levels={
                 "east": "medical_park",
-                "west": "afb"
+                "west": "afb",
+                "northeast": "barrister"
                 },
             turkeys=3,
         ),
@@ -75,6 +76,15 @@ def build_world():
                 "east": "cda_park",
             },
             turkeys=0,
+        ),
+        "barrister": Level(
+            id="barrister",
+            name="Barrister Winerie",
+            description="A lovely winery in downtown Spokane. Larry Stone is there for some reason.",
+            adjacent_levels={
+                "east": "cda_park",
+            },
+            turkeys=1,
         ),
     }
 

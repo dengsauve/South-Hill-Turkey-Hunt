@@ -1,5 +1,5 @@
 def show_turkey():
-    print("""
+    print(r"""
                     .--.
     {\             / q {\
     { `\           \ (-(~`

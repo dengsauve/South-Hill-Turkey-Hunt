@@ -15,6 +15,7 @@ class Game:
         self.level = self.world["home"]
         self.game_won = False
         self.stole_a10 = False
+        self.stole_turkey = False
 
     def start(self):
         welcome.splash_screen()
@@ -57,7 +58,7 @@ class Game:
         elif verb in BUTCHER_COMMANDS:
             self.butcher()
         elif verb in STEAL_VERBS:
-            self.steal_plane()
+            self.steal(args)
         elif verb in EXIT_VERBS:
             self.exit_game()
         else:
@@ -107,7 +108,7 @@ class Game:
                 damage_points = random.choice([1, 2, 3])
                 self.player.take_damage(damage_points)
                 print(
-                    f"Grabbing a turkey turns out to be a poor idea. You lose {damage_points} points of health!"
+                    f"Grabbing a live turkey turns out to be a poor idea. You lose {damage_points} points of health!"
                 )
                 print(self.player.get_health_status())
             else:
@@ -124,17 +125,36 @@ class Game:
         self.game_won = True
         print(f"You've won the game and saved Thanksgiving!")
     
+    def steal(self, args):
+        if args == "turkey":
+            self.steal_turkey(args)
+        else:
+            self.steal_plane()
+
     def steal_plane(self):
         if self.level.id == "afb":
             self.stole_a10 = True
         else:
             print("There's nothing here to steal!")
+    
+    def steal_turkey(self, args):
+        if self.level.id == "barrister":
+            print("You steal Larry Stone's turkey. Party fowl.")
+            self.player.increase_stars()
+        else:
+            self.grab(args)
 
     def exit_game(self):
         turkey.show_turkey()
+        
         print(f"You made a total of {self.moves} moves.")
+        
+        if self.stole_turkey or self.stole_a10:
+            print("Congratulations, you unlocked the following secret objectives:")
         if self.stole_a10:
-            print("You unlocked the secret objective, stealing an A10!")
-        print("\n\nThank you for taking time out of your life to play my game.")
-        print("Cheers,\n\n-Dennis")
+            print("- Stealing an A10!")
+        if self.stole_turkey:
+            print("- Stealing Larry Stone's turkey!")
+        
+        print("\n\nThank you for taking time out of your life to play my game.\nCheers,\n\n-Dennis")
         exit()
